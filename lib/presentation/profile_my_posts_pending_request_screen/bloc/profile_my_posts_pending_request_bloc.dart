@@ -1,0 +1,6 @@
+import 'package:equatable/equatable.dart';import 'package:flutter/material.dart';import '/core/app_export.dart';import '../models/staggeredone_item_model.dart';import 'package:arone_jerome_s_application1/presentation/profile_my_posts_pending_request_screen/models/profile_my_posts_pending_request_model.dart';part 'profile_my_posts_pending_request_event.dart';part 'profile_my_posts_pending_request_state.dart';/// A bloc that manages the state of a ProfileMyPostsPendingRequest according to the event that is dispatched to it.
+class ProfileMyPostsPendingRequestBloc extends Bloc<ProfileMyPostsPendingRequestEvent, ProfileMyPostsPendingRequestState> {ProfileMyPostsPendingRequestBloc(ProfileMyPostsPendingRequestState initialState) : super(initialState) { on<ProfileMyPostsPendingRequestInitialEvent>(_onInitialize); }
+
+_onInitialize(ProfileMyPostsPendingRequestInitialEvent event, Emitter<ProfileMyPostsPendingRequestState> emit, ) async  { emit(state.copyWith(profileMyPostsPendingRequestModelObj: state.profileMyPostsPendingRequestModelObj?.copyWith(staggeredoneItemList: fillStaggeredoneItemList()))); } 
+List<StaggeredoneItemModel> fillStaggeredoneItemList() { return List.generate(6, (index) => StaggeredoneItemModel()); } 
+ }

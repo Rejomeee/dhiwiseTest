@@ -1,0 +1,5 @@
+import 'package:equatable/equatable.dart';import 'package:flutter/material.dart';import '/core/app_export.dart';import 'package:arone_jerome_s_application1/presentation/account_settings_main_screen/models/account_settings_main_model.dart';part 'account_settings_main_event.dart';part 'account_settings_main_state.dart';/// A bloc that manages the state of a AccountSettingsMain according to the event that is dispatched to it.
+class AccountSettingsMainBloc extends Bloc<AccountSettingsMainEvent, AccountSettingsMainState> {AccountSettingsMainBloc(AccountSettingsMainState initialState) : super(initialState) { on<AccountSettingsMainInitialEvent>(_onInitialize); }
+
+_onInitialize(AccountSettingsMainInitialEvent event, Emitter<AccountSettingsMainState> emit, ) async  { emit(state.copyWith(profilevalueController: TextEditingController(), notificationsvaController: TextEditingController(), privacyvalueController: TextEditingController(), securityvalueController: TextEditingController(), aboutvalueoneController: TextEditingController())); } 
+ }

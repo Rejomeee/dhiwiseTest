@@ -1,0 +1,28 @@
+import 'bloc/profile_three_bloc.dart';import 'models/profile_three_model.dart';import 'package:arone_jerome_s_application1/core/app_export.dart';import 'package:arone_jerome_s_application1/presentation/all_friends_page/all_friends_page.dart';import 'package:arone_jerome_s_application1/presentation/discover_page/discover_page.dart';import 'package:arone_jerome_s_application1/presentation/message_main_page/message_main_page.dart';import 'package:arone_jerome_s_application1/presentation/notifications_page/notifications_page.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/appbar_image.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/appbar_subtitle_1.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/custom_app_bar.dart';import 'package:arone_jerome_s_application1/widgets/custom_bottom_bar.dart';import 'package:arone_jerome_s_application1/widgets/custom_text_form_field.dart';import 'package:flutter/material.dart';
+// ignore_for_file: must_be_immutable
+class ProfileThreeScreen extends StatelessWidget {ProfileThreeScreen({Key? key}) : super(key: key);
+
+GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
+static Widget builder(BuildContext context) { return BlocProvider<ProfileThreeBloc>(create: (context) => ProfileThreeBloc(ProfileThreeState(profileThreeModelObj: ProfileThreeModel()))..add(ProfileThreeInitialEvent()), child: ProfileThreeScreen()); } 
+@override Widget build(BuildContext context) { mediaQueryData = MediaQuery.of(context); return SafeArea(child: Scaffold(resizeToAvoidBottomInset: false, appBar: CustomAppBar(leadingWidth: 51.h, leading: AppbarImage(svgPath: ImageConstant.imgArrowleft, margin: EdgeInsets.only(left: 20.h, top: 17.v, bottom: 10.v), onTap: () {onTapArrowleftone(context);}), centerTitle: true, title: AppbarSubtitle1(text: "lbl_profile2".tr), styleType: Style.bgFill_1), body: Container(width: double.maxFinite, padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 15.v), child: Column(children: [GestureDetector(onTap: () {onTapUsername(context);}, child: Container(padding: EdgeInsets.symmetric(vertical: 1.v), decoration: AppDecoration.fillOnPrimaryContainer, child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.end, children: [Padding(padding: EdgeInsets.only(left: 10.h, top: 8.v), child: Row(children: [CustomImageView(svgPath: ImageConstant.imgGetStylinIconsbiodescriptionFirstNameLastName, height: 20.adaptSize, width: 20.adaptSize), Padding(padding: EdgeInsets.only(left: 24.h, top: 3.v), child: Text("lbl_username".tr, style: theme.textTheme.bodyMedium))])), SizedBox(height: 10.v), Divider(color: appTheme.lightGreen400.withOpacity(0.2))]))), Container(padding: EdgeInsets.symmetric(vertical: 1.v), decoration: AppDecoration.fillOnPrimaryContainer, child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.end, children: [Padding(padding: EdgeInsets.only(left: 9.h, top: 8.v), child: Row(children: [CustomImageView(svgPath: ImageConstant.imgMail, height: 20.adaptSize, width: 20.adaptSize), Padding(padding: EdgeInsets.only(left: 25.h, top: 3.v), child: Text("lbl_email_address2".tr, style: theme.textTheme.bodyMedium))])), SizedBox(height: 10.v), Divider(color: appTheme.lightGreen400.withOpacity(0.2))])), SizedBox(height: 5.v), BlocSelector<ProfileThreeBloc, ProfileThreeState, TextEditingController?>(selector: (state) => state.applylabeloneController, builder: (context, applylabeloneController) {return CustomTextFormField(controller: applylabeloneController, hintText: "msg_apply_to_be_a_stylist".tr, hintStyle: theme.textTheme.bodyMedium!, textInputAction: TextInputAction.done, prefix: Container(margin: EdgeInsets.fromLTRB(10.h, 11.v, 25.h, 13.v), child: CustomImageView(svgPath: ImageConstant.imgGetStylinIconsapplyToBeAStylist)), prefixConstraints: BoxConstraints(maxHeight: 44.v), contentPadding: EdgeInsets.only(top: 14.v, right: 30.h, bottom: 14.v));})])), bottomNavigationBar: CustomBottomBar(onChanged: (BottomBarEnum type) {Navigator.pushNamed(navigatorKey.currentContext!, getCurrentRoute(type));}))); } 
+///Handling route based on bottom click actions
+String getCurrentRoute(BottomBarEnum type) { switch (type) {case BottomBarEnum.Dashboard: return AppRoutes.notificationsPage; case BottomBarEnum.Mystylin: return AppRoutes.allFriendsPage; case BottomBarEnum.Upload: return "/"; case BottomBarEnum.Messages: return AppRoutes.messageMainPage; case BottomBarEnum.Discover: return AppRoutes.discoverPage; default: return "/";} } 
+///Handling page based on route
+Widget getCurrentPage(BuildContext context, String currentRoute, ) { switch (currentRoute) {case AppRoutes.notificationsPage: return NotificationsPage.builder(context); case AppRoutes.allFriendsPage: return AllFriendsPage.builder(context); case AppRoutes.messageMainPage: return MessageMainPage.builder(context); case AppRoutes.discoverPage: return DiscoverPage.builder(context); default: return DefaultWidget();} } 
+
+
+/// Navigates to the previous screen.
+///
+/// This function takes a [BuildContext] object as a parameter, which is
+/// used to build the navigation stack. When the action is triggered, this
+/// function uses the [NavigatorService] to navigate to the previous screen
+/// in the navigation stack.
+onTapArrowleftone(BuildContext context) { NavigatorService.goBack(); } 
+/// Navigates to the usernameScreen when the action is triggered.
+///
+/// The [BuildContext] parameter is used to build the navigation stack.
+/// When the action is triggered, this function uses the [NavigatorService]
+/// to push the named route for the usernameScreen.
+onTapUsername(BuildContext context) { NavigatorService.pushNamed(AppRoutes.usernameScreen, ); } 
+ }
