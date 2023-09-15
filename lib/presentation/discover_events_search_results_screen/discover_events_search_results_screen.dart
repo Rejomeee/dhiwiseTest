@@ -1,0 +1,20 @@
+import '../discover_events_search_results_screen/widgets/fashionshow_item_widget.dart';import 'bloc/discover_events_search_results_bloc.dart';import 'models/discover_events_search_results_model.dart';import 'models/fashionshow_item_model.dart';import 'package:arone_jerome_s_application1/core/app_export.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/appbar_image.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/appbar_subtitle_1.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/custom_app_bar.dart';import 'package:arone_jerome_s_application1/widgets/custom_text_form_field.dart';import 'package:flutter/material.dart';class DiscoverEventsSearchResultsScreen extends StatelessWidget {const DiscoverEventsSearchResultsScreen({Key? key}) : super(key: key);
+
+static Widget builder(BuildContext context) { return BlocProvider<DiscoverEventsSearchResultsBloc>(create: (context) => DiscoverEventsSearchResultsBloc(DiscoverEventsSearchResultsState(discoverEventsSearchResultsModelObj: DiscoverEventsSearchResultsModel()))..add(DiscoverEventsSearchResultsInitialEvent()), child: DiscoverEventsSearchResultsScreen()); } 
+@override Widget build(BuildContext context) { mediaQueryData = MediaQuery.of(context); return SafeArea(child: Scaffold(resizeToAvoidBottomInset: false, appBar: CustomAppBar(leadingWidth: 51.h, leading: AppbarImage(svgPath: ImageConstant.imgArrowleft, margin: EdgeInsets.only(left: 20.h, top: 17.v, bottom: 10.v), onTap: () {onTapArrowleftone(context);}), centerTitle: true, title: AppbarSubtitle1(text: "lbl_search_results".tr), styleType: Style.bgFill_1), body: Container(width: double.maxFinite, padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 10.v), child: Column(children: [BlocSelector<DiscoverEventsSearchResultsBloc, DiscoverEventsSearchResultsState, TextEditingController?>(selector: (state) => state.discovericonController, builder: (context, discovericonController) {return CustomTextFormField(controller: discovericonController, hintText: "lbl_fashion_shows".tr, hintStyle: CustomTextStyles.bodyMediumRegular_1, textInputAction: TextInputAction.done, prefix: Container(margin: EdgeInsets.fromLTRB(10.h, 5.v, 10.h, 7.v), child: CustomImageView(svgPath: ImageConstant.imgDiscovericon)), prefixConstraints: BoxConstraints(maxHeight: 42.v), contentPadding: EdgeInsets.only(top: 13.v, right: 30.h, bottom: 13.v), borderDecoration: TextFormFieldStyleHelper.fillSecondaryContainer, fillColor: theme.colorScheme.secondaryContainer.withOpacity(0.2));}), SizedBox(height: 28.v), Expanded(child: BlocSelector<DiscoverEventsSearchResultsBloc, DiscoverEventsSearchResultsState, DiscoverEventsSearchResultsModel?>(selector: (state) => state.discoverEventsSearchResultsModelObj, builder: (context, discoverEventsSearchResultsModelObj) {return GridView.builder(shrinkWrap: true, gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(mainAxisExtent: 132.v, crossAxisCount: 3, mainAxisSpacing: 12.h, crossAxisSpacing: 12.h), physics: BouncingScrollPhysics(), itemCount: discoverEventsSearchResultsModelObj?.fashionshowItemList.length ?? 0, itemBuilder: (context, index) {FashionshowItemModel model = discoverEventsSearchResultsModelObj?.fashionshowItemList[index] ?? FashionshowItemModel(); return FashionshowItemWidget(model, onTapFashionshow: () {onTapFashionshow(context);});});}))])))); } 
+/// Navigates to the discoverEventInnerScreen when the action is triggered.
+///
+/// The [BuildContext] parameter is used to build the navigation stack.
+/// When the action is triggered, this function uses the [NavigatorService]
+/// to push the named route for the discoverEventInnerScreen.
+onTapFashionshow(BuildContext context) { NavigatorService.pushNamed(AppRoutes.discoverEventInnerScreen); } 
+
+
+/// Navigates to the previous screen.
+///
+/// This function takes a [BuildContext] object as a parameter, which is
+/// used to build the navigation stack. When the action is triggered, this
+/// function uses the [NavigatorService] to navigate to the previous screen
+/// in the navigation stack.
+onTapArrowleftone(BuildContext context) { NavigatorService.goBack(); } 
+ }

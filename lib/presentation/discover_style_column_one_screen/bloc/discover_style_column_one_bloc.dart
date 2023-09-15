@@ -1,0 +1,7 @@
+import 'package:equatable/equatable.dart';import 'package:flutter/material.dart';import '/core/app_export.dart';import '../models/fashionquestion_item_model.dart';import '../models/styledress_item_model.dart';import 'package:arone_jerome_s_application1/presentation/discover_style_column_one_screen/models/discover_style_column_one_model.dart';part 'discover_style_column_one_event.dart';part 'discover_style_column_one_state.dart';/// A bloc that manages the state of a DiscoverStyleColumnOne according to the event that is dispatched to it.
+class DiscoverStyleColumnOneBloc extends Bloc<DiscoverStyleColumnOneEvent, DiscoverStyleColumnOneState> {DiscoverStyleColumnOneBloc(DiscoverStyleColumnOneState initialState) : super(initialState) { on<DiscoverStyleColumnOneInitialEvent>(_onInitialize); }
+
+List<FashionquestionItemModel> fillFashionquestionItemList() { return List.generate(4, (index) => FashionquestionItemModel()); } 
+List<StyledressItemModel> fillStyledressItemList() { return List.generate(3, (index) => StyledressItemModel()); } 
+_onInitialize(DiscoverStyleColumnOneInitialEvent event, Emitter<DiscoverStyleColumnOneState> emit, ) async  { emit(state.copyWith(searchController: TextEditingController())); emit(state.copyWith(discoverStyleColumnOneModelObj: state.discoverStyleColumnOneModelObj?.copyWith(fashionquestionItemList: fillFashionquestionItemList(), styledressItemList: fillStyledressItemList()))); } 
+ }

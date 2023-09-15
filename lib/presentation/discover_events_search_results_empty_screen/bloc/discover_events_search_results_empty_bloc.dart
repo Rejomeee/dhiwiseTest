@@ -1,0 +1,5 @@
+import 'package:equatable/equatable.dart';import 'package:flutter/material.dart';import '/core/app_export.dart';import 'package:arone_jerome_s_application1/presentation/discover_events_search_results_empty_screen/models/discover_events_search_results_empty_model.dart';part 'discover_events_search_results_empty_event.dart';part 'discover_events_search_results_empty_state.dart';/// A bloc that manages the state of a DiscoverEventsSearchResultsEmpty according to the event that is dispatched to it.
+class DiscoverEventsSearchResultsEmptyBloc extends Bloc<DiscoverEventsSearchResultsEmptyEvent, DiscoverEventsSearchResultsEmptyState> {DiscoverEventsSearchResultsEmptyBloc(DiscoverEventsSearchResultsEmptyState initialState) : super(initialState) { on<DiscoverEventsSearchResultsEmptyInitialEvent>(_onInitialize); }
+
+_onInitialize(DiscoverEventsSearchResultsEmptyInitialEvent event, Emitter<DiscoverEventsSearchResultsEmptyState> emit, ) async  { emit(state.copyWith(searchController: TextEditingController())); } 
+ }

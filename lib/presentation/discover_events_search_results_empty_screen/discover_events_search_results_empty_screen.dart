@@ -1,0 +1,14 @@
+import 'bloc/discover_events_search_results_empty_bloc.dart';import 'models/discover_events_search_results_empty_model.dart';import 'package:arone_jerome_s_application1/core/app_export.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/appbar_image.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/appbar_subtitle_1.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/custom_app_bar.dart';import 'package:arone_jerome_s_application1/widgets/custom_search_view.dart';import 'package:flutter/material.dart';class DiscoverEventsSearchResultsEmptyScreen extends StatelessWidget {const DiscoverEventsSearchResultsEmptyScreen({Key? key}) : super(key: key);
+
+static Widget builder(BuildContext context) { return BlocProvider<DiscoverEventsSearchResultsEmptyBloc>(create: (context) => DiscoverEventsSearchResultsEmptyBloc(DiscoverEventsSearchResultsEmptyState(discoverEventsSearchResultsEmptyModelObj: DiscoverEventsSearchResultsEmptyModel()))..add(DiscoverEventsSearchResultsEmptyInitialEvent()), child: DiscoverEventsSearchResultsEmptyScreen()); } 
+@override Widget build(BuildContext context) { mediaQueryData = MediaQuery.of(context); return SafeArea(child: Scaffold(resizeToAvoidBottomInset: false, appBar: CustomAppBar(leadingWidth: 51.h, leading: AppbarImage(svgPath: ImageConstant.imgArrowleft, margin: EdgeInsets.only(left: 20.h, top: 17.v, bottom: 10.v), onTap: () {onTapArrowleftone(context);}), centerTitle: true, title: AppbarSubtitle1(text: "lbl_search_results".tr), styleType: Style.bgFill_1), body: Container(width: double.maxFinite, padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 10.v), child: Column(children: [BlocSelector<DiscoverEventsSearchResultsEmptyBloc, DiscoverEventsSearchResultsEmptyState, TextEditingController?>(selector: (state) => state.searchController, builder: (context, searchController) {return CustomSearchView(controller: searchController, hintText: "lbl_runway_shows".tr, prefix: Container(margin: EdgeInsets.fromLTRB(10.h, 5.v, 10.h, 7.v), child: CustomImageView(svgPath: ImageConstant.imgDiscovericon)), prefixConstraints: BoxConstraints(maxHeight: 42.v), suffix: Padding(padding: EdgeInsets.only(right: 15.h), child: IconButton(onPressed: () {searchController!.clear();}, icon: Icon(Icons.clear, color: Colors.grey.shade600))));}), SizedBox(height: 40.v), Text("msg_no_events_found".tr, style: CustomTextStyles.bodyMediumRegular_1), SizedBox(height: 5.v)])))); } 
+
+
+/// Navigates to the previous screen.
+///
+/// This function takes a [BuildContext] object as a parameter, which is
+/// used to build the navigation stack. When the action is triggered, this
+/// function uses the [NavigatorService] to navigate to the previous screen
+/// in the navigation stack.
+onTapArrowleftone(BuildContext context) { NavigatorService.goBack(); } 
+ }

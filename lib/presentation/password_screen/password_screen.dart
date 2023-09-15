@@ -1,0 +1,24 @@
+import 'bloc/password_bloc.dart';import 'models/password_model.dart';import 'package:arone_jerome_s_application1/core/app_export.dart';import 'package:arone_jerome_s_application1/core/utils/validation_functions.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/appbar_image.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/appbar_image_1.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/appbar_subtitle_1.dart';import 'package:arone_jerome_s_application1/widgets/app_bar/custom_app_bar.dart';import 'package:arone_jerome_s_application1/widgets/custom_text_form_field.dart';import 'package:flutter/material.dart';
+// ignore_for_file: must_be_immutable
+class PasswordScreen extends StatelessWidget {PasswordScreen({Key? key}) : super(key: key);
+
+GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+static Widget builder(BuildContext context) { return BlocProvider<PasswordBloc>(create: (context) => PasswordBloc(PasswordState(passwordModelObj: PasswordModel()))..add(PasswordInitialEvent()), child: PasswordScreen()); } 
+@override Widget build(BuildContext context) { mediaQueryData = MediaQuery.of(context); return SafeArea(child: Scaffold(resizeToAvoidBottomInset: false, appBar: CustomAppBar(leadingWidth: 51.h, leading: AppbarImage(svgPath: ImageConstant.imgArrowleft, margin: EdgeInsets.only(left: 20.h, top: 17.v, bottom: 10.v), onTap: () {onTapArrowleftone(context);}), centerTitle: true, title: AppbarSubtitle1(text: "lbl_password2".tr), actions: [GestureDetector(onTap: () {onTapSend(context);}, child: Container(margin: EdgeInsets.fromLTRB(15.h, 10.v, 15.h, 6.v), padding: EdgeInsets.symmetric(horizontal: 6.h, vertical: 7.v), decoration: AppDecoration.fillOnPrimaryContainer, child: AppbarImage1(svgPath: ImageConstant.imgGetstyliniconssendBlack900, margin: EdgeInsets.only(right: 1.h))))], styleType: Style.bgFill_1), body: Form(key: _formKey, child: SizedBox(width: double.maxFinite, child: Column(children: [BlocSelector<PasswordBloc, PasswordState, TextEditingController?>(selector: (state) => state.passwordController, builder: (context, passwordController) {return CustomTextFormField(controller: passwordController, margin: EdgeInsets.only(left: 30.h, top: 15.v, right: 30.h), hintText: "lbl_old_password".tr, textInputType: TextInputType.visiblePassword, validator: (value) {if (value == null || (!isValidPassword(value, isRequired: true))) {return "Please enter valid password";} return null;}, obscureText: true, contentPadding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 14.v));}), BlocSelector<PasswordBloc, PasswordState, TextEditingController?>(selector: (state) => state.newpasswordController, builder: (context, newpasswordController) {return CustomTextFormField(controller: newpasswordController, margin: EdgeInsets.symmetric(horizontal: 30.h), hintText: "lbl_new_password".tr, textInputType: TextInputType.visiblePassword, validator: (value) {if (value == null || (!isValidPassword(value, isRequired: true))) {return "Please enter valid password";} return null;}, obscureText: true, contentPadding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 14.v));}), BlocSelector<PasswordBloc, PasswordState, TextEditingController?>(selector: (state) => state.newpasswordController1, builder: (context, newpasswordController1) {return CustomTextFormField(controller: newpasswordController1, margin: EdgeInsets.symmetric(horizontal: 30.h), hintText: "msg_confirm_new_password".tr, textInputAction: TextInputAction.done, textInputType: TextInputType.visiblePassword, validator: (value) {if (value == null || (!isValidPassword(value, isRequired: true))) {return "Please enter valid password";} return null;}, obscureText: true, contentPadding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 14.v));}), Align(alignment: Alignment.centerLeft, child: Padding(padding: EdgeInsets.only(left: 43.h, top: 22.v), child: Text("msg_forgot_password".tr, style: CustomTextStyles.bodySmallLightgreen400))), Spacer(), CustomImageView(svgPath: ImageConstant.imgVariousdevice, height: 279.v, width: 375.h)]))))); } 
+
+
+/// Navigates to the previous screen.
+///
+/// This function takes a [BuildContext] object as a parameter, which is
+/// used to build the navigation stack. When the action is triggered, this
+/// function uses the [NavigatorService] to navigate to the previous screen
+/// in the navigation stack.
+onTapArrowleftone(BuildContext context) { NavigatorService.goBack(); } 
+/// Navigates to the passwordInvalidScreen when the action is triggered.
+///
+/// The [BuildContext] parameter is used to build the navigation stack.
+/// When the action is triggered, this function uses the [NavigatorService]
+/// to push the named route for the passwordInvalidScreen.
+onTapSend(BuildContext context) { NavigatorService.pushNamed(AppRoutes.passwordInvalidScreen, ); } 
+ }

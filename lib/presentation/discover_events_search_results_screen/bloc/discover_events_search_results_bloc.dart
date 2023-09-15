@@ -1,0 +1,6 @@
+import 'package:equatable/equatable.dart';import 'package:flutter/material.dart';import '/core/app_export.dart';import '../models/fashionshow_item_model.dart';import 'package:arone_jerome_s_application1/presentation/discover_events_search_results_screen/models/discover_events_search_results_model.dart';part 'discover_events_search_results_event.dart';part 'discover_events_search_results_state.dart';/// A bloc that manages the state of a DiscoverEventsSearchResults according to the event that is dispatched to it.
+class DiscoverEventsSearchResultsBloc extends Bloc<DiscoverEventsSearchResultsEvent, DiscoverEventsSearchResultsState> {DiscoverEventsSearchResultsBloc(DiscoverEventsSearchResultsState initialState) : super(initialState) { on<DiscoverEventsSearchResultsInitialEvent>(_onInitialize); }
+
+List<FashionshowItemModel> fillFashionshowItemList() { return List.generate(9, (index) => FashionshowItemModel()); } 
+_onInitialize(DiscoverEventsSearchResultsInitialEvent event, Emitter<DiscoverEventsSearchResultsState> emit, ) async  { emit(state.copyWith(discovericonController: TextEditingController())); emit(state.copyWith(discoverEventsSearchResultsModelObj: state.discoverEventsSearchResultsModelObj?.copyWith(fashionshowItemList: fillFashionshowItemList()))); } 
+ }
